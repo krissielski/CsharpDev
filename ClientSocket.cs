@@ -21,7 +21,7 @@ namespace SocketDev
     {
 
         //member variables
-        Socket tcpSocket = null;
+        private readonly Socket tcpSocket = null;
 
 
         //Constructor
@@ -38,24 +38,12 @@ namespace SocketDev
         public bool OpenSocket(string ipAddr, int port)
         {
 
-
             // Connect to a remote device.  
             try
             {
-                // Establish the remote endpoint for the socket.  
-                //IPHostEntry ipHost = Dns.Resolve("127.0.0.1");
-                //IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-
-                //IPHostEntry ipHost = Dns.Resolve(ipAddr);
-                //Console.WriteLine(" Address {0}", ipHost.AddressList[0]);
-                //IPAddress ipAddress = ipHost.AddressList[0];
 
                 IPAddress ipAddress = IPAddress.Parse( ipAddr );
                 IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, port);
-
-                // Create a TCP/IP  socket.  
-                //tcpSocket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
 
                 // Connect the socket to the remote endpoint. Catch any errors.  
                 try
@@ -63,20 +51,6 @@ namespace SocketDev
                     tcpSocket.Connect(ipEndPoint);
 
                     Console.WriteLine("Socket connected to {0}", tcpSocket.RemoteEndPoint.ToString());
-
-                    //// Encode the data string into a byte array.  
-                    //byte[] msg = Encoding.ASCII.GetBytes("This is a test<EOF>");
-
-                    //// Send the data through the socket.  
-                    //int bytesSent = tcpSocket.Send(msg);
-
-                    //// Receive the response from the remote device.  
-                    //int bytesRec = tcpSocket.Receive(bytes);
-                    //Console.WriteLine("Echoed test = {0}", Encoding.ASCII.GetString(bytes, 0, bytesRec));
-
-                    //// Release the socket.  
-                    //tcpSocket.Shutdown(SocketShutdown.Both);
-                    //tcpSocket.Close();
 
                 }
                 catch (ArgumentNullException ane)
