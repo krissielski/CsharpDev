@@ -20,35 +20,28 @@ namespace SocketDev
     public partial class MQTTForm : Form
     {
 
-        //Members
-
-        // create client instance 
-
-        private const string awsEndpoint = "*********.iot.us-east-1.amazonaws.com";
+        //Setup for AWS Connection 
+        private const string awsEndpoint = "**********.iot.us-east-1.amazonaws.com";
         private const int awsPort = 8883;
-
-        private static readonly X509Certificate2 clientCert = new X509Certificate2(@"csharpdev.pfx", "");
-        private static readonly X509Certificate  caCert = X509Certificate.CreateFromSignedFile(@"AmazonRootCA1.pem");
-
-        //The Old way
-        //private MqttClient client = new MqttClient("test.mosquitto.org");
-
-        //The AWS Way
-        private MqttClient client = new MqttClient(
-            awsEndpoint,
-            awsPort,
-            true,
-            caCert,
-            clientCert,
-            MqttSslProtocols.TLSv1_2);
-
-
+        private readonly static  X509Certificate2 clientCert = new X509Certificate2(@"csharpdev.pfx", "");
+        private readonly static  X509Certificate  caCert = X509Certificate.CreateFromSignedFile(@"AmazonRootCA1.pem");
+        private readonly MqttClient client;
 
 
         public MQTTForm()
         {
             InitializeComponent();
-        }
+
+            //Generate client for AWS connection
+            client = new MqttClient(
+                awsEndpoint,
+                awsPort,
+                true,
+                caCert,
+                clientCert,
+                MqttSslProtocols.TLSv1_2);
+
+    }
 
         private void MQTTForm_Load(object sender, EventArgs e)
         {
@@ -80,13 +73,10 @@ namespace SocketDev
        private void btnMqttConnect_Click(object sender, EventArgs e)
         {
 
-            // create client instance 
-            //private MqttClient client = new MqttClient("test.mosquitto.org");
-
-
             //Subscribe
             string[] subscribeTopics = { "kris/test/#" };
-            byte[] qosLevels = { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE };
+          //byte[] qosLevels = { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE };  //QOS=0
+            byte[] qosLevels = { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE }; //QOS=1
 
             client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived; //Add Event
 
@@ -95,7 +85,7 @@ namespace SocketDev
             //Then, Connect...
             try
             {
-                client.Connect("CsharpDev");
+                client.Connect( Guid.NewGuid().ToString() );
             }
             catch (Exception ex)
             {
