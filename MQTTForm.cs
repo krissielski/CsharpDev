@@ -12,17 +12,36 @@ using System.Windows.Forms;
 // including the M2Mqtt Library
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace SocketDev
 {
+
     public partial class MQTTForm : Form
     {
 
         //Members
 
         // create client instance 
-        private MqttClient client = new MqttClient("test.mosquitto.org");
+
+        private const string awsEndpoint = "*********.iot.us-east-1.amazonaws.com";
+        private const int awsPort = 8883;
+
+        private static readonly X509Certificate2 clientCert = new X509Certificate2(@"csharpdev.pfx", "");
+        private static readonly X509Certificate  caCert = X509Certificate.CreateFromSignedFile(@"AmazonRootCA1.pem");
+
+        //The Old way
+        //private MqttClient client = new MqttClient("test.mosquitto.org");
+
+        //The AWS Way
+        private MqttClient client = new MqttClient(
+            awsEndpoint,
+            awsPort,
+            true,
+            caCert,
+            clientCert,
+            MqttSslProtocols.TLSv1_2);
+
 
 
 
@@ -65,8 +84,6 @@ namespace SocketDev
             //private MqttClient client = new MqttClient("test.mosquitto.org");
 
 
-
-
             //Subscribe
             string[] subscribeTopics = { "kris/test/#" };
             byte[] qosLevels = { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE };
@@ -76,8 +93,29 @@ namespace SocketDev
             client.Subscribe(subscribeTopics, qosLevels);
 
             //Then, Connect...
-            client.Connect("SomeClientIDname");
-            Console.WriteLine("MQTT Connect");
+            try
+            {
+                client.Connect("CsharpDev");
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Unexpected exception : {0}", ex.ToString());
+                Console.WriteLine("Unexpected exception MQTT Connect");
+            }
+
+
+
+            Console.WriteLine("MQTT Connecting.....");
+
+            if( client.IsConnected )
+            {
+                Console.WriteLine("    SUCCESS!!!");
+            }
+            else
+            {
+                Console.WriteLine("    Failed!");
+            }
+
         }
 
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
