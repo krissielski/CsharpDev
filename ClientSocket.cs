@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+// including the M2Mqtt Library
+using uPLibrary.Networking.M2Mqtt;
+using uPLibrary.Networking.M2Mqtt.Messages;
+
 
 
 /// <summary>
@@ -51,6 +55,7 @@ namespace SocketDev
                     tcpSocket.Connect(ipEndPoint);
 
                     Console.WriteLine("Socket connected to {0}", tcpSocket.RemoteEndPoint.ToString());
+                    return true;
 
                 }
                 catch (ArgumentNullException ane)
@@ -99,6 +104,7 @@ namespace SocketDev
             try
             {
                 int bytesSent = tcpSocket.Send(data,size,SocketFlags.None);
+                return true;
             }
             catch (ArgumentNullException ane)
             {
@@ -111,10 +117,9 @@ namespace SocketDev
             catch (Exception e)
             {
                 Console.WriteLine("Unexpected exception : {0}", e.ToString());
-                return false;
             }
 
-            return true;
+            return false;
         }
 
 
@@ -164,10 +169,9 @@ namespace SocketDev
             catch (Exception e)
             {
                 Console.WriteLine("Unexpected exception : {0}", e.ToString());
-                return false;
             }
 
-            return true;
+            return false;
         }
 
 
