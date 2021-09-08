@@ -7,11 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-// including the M2Mqtt Library
-using uPLibrary.Networking.M2Mqtt;
-using uPLibrary.Networking.M2Mqtt.Messages;
-
-
 
 /// <summary>
 /// Class Client Socket

@@ -31,6 +31,26 @@ namespace SocketDev
         {
             Console.WriteLine("Test Button");
 
+
+            //Message Box Tests
+            //Simple Message Box
+            //MessageBox.Show("Message", "Title");
+
+            string message = "This is the Message";
+            string title = "MsgTitle";
+
+            MessageBoxButtons msgButtons = MessageBoxButtons.YesNoCancel;
+            DialogResult msgResult = DialogResult.None;
+
+
+            msgResult = MessageBox.Show(message, title, msgButtons);
+            
+            if( msgResult == DialogResult.Yes)
+            {
+                Console.WriteLine("Yes");
+            }
+
+
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -74,6 +94,19 @@ namespace SocketDev
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
 
+
+            ////Modal:
+            //MQTTForm mqttForm = new MQTTForm();
+            //mqttForm.ShowDialog();
+
+            //Modeless:
+            MQTTForm mqttForm = new MQTTForm();
+            mqttForm.Show();
+
+
+        }
     }
 }
