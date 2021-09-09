@@ -34,7 +34,8 @@ namespace SocketDev
             this.bthClose = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.btnReceive = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnOpenForm2 = new System.Windows.Forms.Button();
+            this.btnOpenForm3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTest
@@ -87,22 +88,33 @@ namespace SocketDev
             this.btnReceive.UseVisualStyleBackColor = true;
             this.btnReceive.Click += new System.EventHandler(this.btnReceive_Click);
             // 
-            // button1
+            // btnOpenForm2
             // 
-            this.button1.Location = new System.Drawing.Point(303, 160);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 48);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Open Form2";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnOpenForm2.Location = new System.Drawing.Point(303, 160);
+            this.btnOpenForm2.Name = "btnOpenForm2";
+            this.btnOpenForm2.Size = new System.Drawing.Size(97, 48);
+            this.btnOpenForm2.TabIndex = 5;
+            this.btnOpenForm2.Text = "Open Form2";
+            this.btnOpenForm2.UseVisualStyleBackColor = true;
+            this.btnOpenForm2.Click += new System.EventHandler(this.btnOpenForm2_Click);
+            // 
+            // btnOpenForm3
+            // 
+            this.btnOpenForm3.Location = new System.Drawing.Point(304, 230);
+            this.btnOpenForm3.Name = "btnOpenForm3";
+            this.btnOpenForm3.Size = new System.Drawing.Size(97, 48);
+            this.btnOpenForm3.TabIndex = 6;
+            this.btnOpenForm3.Text = "Open Form3";
+            this.btnOpenForm3.UseVisualStyleBackColor = true;
+            this.btnOpenForm3.Click += new System.EventHandler(this.btnOpenForm3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 398);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(677, 486);
+            this.Controls.Add(this.btnOpenForm3);
+            this.Controls.Add(this.btnOpenForm2);
             this.Controls.Add(this.btnReceive);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.bthClose);
@@ -122,7 +134,8 @@ namespace SocketDev
         private System.Windows.Forms.Button bthClose;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Button btnReceive;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnOpenForm2;
+        private System.Windows.Forms.Button btnOpenForm3;
     }
 }
 

@@ -94,10 +94,8 @@ namespace SocketDev
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnOpenForm2_Click(object sender, EventArgs e)
         {
-
-
             ////Modal:
             //MQTTForm mqttForm = new MQTTForm();
             //mqttForm.ShowDialog();
@@ -105,8 +103,13 @@ namespace SocketDev
             //Modeless:
             MQTTForm mqttForm = new MQTTForm();
             mqttForm.Show();
+        }
 
-
+        private void btnOpenForm3_Click(object sender, EventArgs e)
+        {
+            //Modal:
+            ComForm comForm = new ComForm();
+            comForm.ShowDialog();
         }
     }
 }
